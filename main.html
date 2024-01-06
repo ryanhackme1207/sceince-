@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        #quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        #question {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        #answer {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        #inputAnswer {
+            padding: 10px;
+            font-size: 14px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+        #submitBtn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #submitBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div id="question"></div>
+    <div id="answer"></div>
+    <input type="text" id="inputAnswer" placeholder="Enter your answer">
+    <button id="submitBtn" onclick="checkAnswer()">Submit</button>
+    <div id="result"></div>
+</div>
+
+<audio id="quizAudio" src="prank.mp3"></audio>
+
+<script>
+    const quizData = [];
+    let currentQuestion = 0;
+    let correctAnswers = 0;
+
+    function setupQuiz() {
+        // Set up quiz data (questions and answers)
+        // Modify this array with your own quiz data
+        quizData.push({question: "2 + 2 =", answer: 4});
+        quizData.push({question: "8 - 3 =", answer: 5});
+        quizData.push({question: "5 + 5 =", answer: 10});
+        quizData.push({question: "10 - 7 =", answer: 3});
+        quizData.push({question: "3 + 6 =", answer: 9});
+
+        displayQuestion();
+    }
+
+    function displayQuestion() {
+        if (currentQuestion < quizData.length) {
+            const questionElem = document.getElementById("question");
+            const answerElem = document.getElementById("answer");
+
+            questionElem.textContent = "Question: " + quizData[currentQuestion].question;
+            answerElem.textContent = "Answer: " + quizData[currentQuestion].answer;
+
+            document.getElementById("inputAnswer").value = "";
+            document.getElementById("result").textContent = "";
+        } else {
+            showResult();
+        }
+    }
+
+    function checkAnswer() {
+        const userAnswer = parseInt(document.getElementById("inputAnswer").value, 10);
+        if (!isNaN(userAnswer)) {
+            if (userAnswer === quizData[currentQuestion].answer) {
+                document.getElementById("result").textContent = "Correct! Well done.";
+                correctAnswers++;
+                playQuizAudio();
+            } else {
+                document.getElementById("result").textContent = "Wrong answer. Try again.";
+                playQuizAudio();
+            }
+
+            currentQuestion++;
+            displayQuestion();
+        } else {
+            alert("Please enter a valid numeric answer.");
+        }
+    }
+
+    function showResult() {
+        const resultElem = document.getElementById("result");
+        resultElem.textContent = `Quiz Over. You answered ${correctAnswers} out of ${quizData.length} questions correctly.`;
+    }
+
+    function playQuizAudio() {
+        const quizAudio = document.getElementById("quizAudio");
+        quizAudio.play();
+    }
+
+    // Initialize the quiz
+    setupQuiz();
+</script>
+
+</body>
+</html>
