@@ -13,8 +13,11 @@
 <div id="quiz-container">
     <div id="question"></div>
     <div id="answer"></div>
-    <input type="text" id="inputAnswer" placeholder="Enter your answer">
-    <button id="submitBtn" onclick="checkAnswer()">Submit</button>
+    <div id="answerButtons"></div>
+    <div>
+        <input type="text" id="inputAnswer" placeholder="Enter your answer">
+        <button id="submitBtn" onclick="checkAnswer()">Submit</button>
+    </div>
     <div id="result"></div>
 </div>
 
@@ -66,16 +69,31 @@
         if (currentQuestion < quizData.length) {
             const questionElem = document.getElementById("question");
             const answerElem = document.getElementById("answer");
+            const answerButtonsElem = document.getElementById("answerButtons");
 
             const currentQuiz = quizData[currentQuestion];
             questionElem.textContent = `Question ${currentQuestion + 1}: ${currentQuiz.question}`;
-            answerElem.textContent = currentQuiz.choices.join("\n");
+            answerElem.textContent = ""; // Clear previous answer text
+
+            // Create buttons for answer choices
+            answerButtonsElem.innerHTML = "";
+            currentQuiz.choices.forEach((choice, index) => {
+                const button = document.createElement("button");
+                button.textContent = choice;
+                button.addEventListener("click", () => handleAnswerButtonClick(index));
+                answerButtonsElem.appendChild(button);
+            });
 
             document.getElementById("inputAnswer").value = "";
             document.getElementById("result").textContent = "";
         } else {
             showResult();
         }
+    }
+
+    function handleAnswerButtonClick(index) {
+        const selectedChoice = quizData[currentQuestion].choices[index];
+        document.getElementById("inputAnswer").value = selectedChoice;
     }
 
     function checkAnswer() {
