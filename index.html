@@ -96,9 +96,9 @@
 
     function playQuizAudio() {
         const quizAudio = document.getElementById("quizAudio");
-        
-        // Play audio only if the answer is incorrect
-        if (quizAudio.paused) {
+
+        // Check if the answer is incorrect and the audio is paused
+        if (userAnswer !== correctAnswer && quizAudio.paused) {
             quizAudio.play();
         }
     }
