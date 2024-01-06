@@ -5,61 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-
-        #quiz-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-        }
-
-        #question {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #007bff;
-        }
-
-        #answer {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        #inputAnswer {
-            padding: 10px;
-            font-size: 14px;
-            width: 80%;
-            margin-bottom: 10px;
-        }
-
-        #submitBtn {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        #submitBtn:hover {
-            background-color: #0056b3;
-        }
-
-        #result {
-            font-size: 18px;
-            margin-top: 20px;
-            color: #28a745;
-        }
+        /* Your styles go here */
     </style>
 </head>
 <body>
@@ -76,11 +22,38 @@
 
 <script>
     const quizData = [
-        { question: "世界上使用人数最多的语言是:", choices: ["A.英语", "B.汉语", "C.西班牙语", "D.世界语"], correct: "B" },
-        { question: "世界上海拔最高的山峰是哪一座?", choices: ["A.乔戈里峰", "B.珠穆朗玛峰", "C.干城章嘉峰", "D.公格尔山峰"], correct: "B" },
-        { question: "\"鲁\"是我国哪个省份的简称:", choices: ["A.河北", "B.吉林", "C.山东", "D.山西"], correct: "C" },
-        // ... (Add all other questions and answer choices)
-    ];
+    { question: "世界上使用人数最多的语言是:", choices: ["A.英语", "B.汉语", "C.西班牙语", "D.世界语"], correct: "B" },
+    { question: "世界上海拔最高的山峰是哪一座?", choices: ["A.乔戈里峰", "B.珠穆朗玛峰", "C.干城章嘉峰", "D.公格尔山峰"], correct: "B" },
+    { question: "\"鲁\"是我国哪个省份的简称:", choices: ["A.河北", "B.吉林", "C.山东", "D.山西"], correct: "C" },
+    { question: "《西游记》中的火焰山在哪里？", choices: ["A.甘肃", "B.青海", "C.新疆", "D.西藏"], correct: "C" },
+    { question: "“刘三姐”是我国哪个少数民族民间传说中的人物？", choices: ["A.壮族", "B.苗族", "C.维吾尔族", "D.蒙古族"], correct: "A" },
+    { question: "\"干冰\"的成分是：", choices: ["A.O2", "B.H2O", "C.SO2", "D.CO2"], correct: "D" },
+    { question: "文艺复兴时期的《忏悔录》是谁写的？", choices: ["A.卢梭", "B.契科夫", "C.高尔基", "D.列夫托尔斯泰"], correct: "A" },
+    { question: "中国古代名医华佗为谁所杀？", choices: ["A.刘邦", "B.项羽", "C.孙权", "D.曹操"], correct: "D" },
+    { question: "被称为有野人出没的神农架在我国哪一省份？", choices: ["A.河南", "B.湖北", "C.湖南", "D.甘肃"], correct: "B" },
+    { question: "UFO的具体涵义是：", choices: ["A.不明固体", "B.神秘的物体", "C.未知的物体", "D.不明飞行物"], correct: "D" },
+    { question: "我国第一大岛是:", choices: ["A.西沙群岛", "B.台湾岛", "C.澎湖列岛", "D.钓鱼岛"], correct: "B" },
+    { question: "哪个行星的表面与月球的表面是非常相似的？", choices: ["A.木星", "B.水星", "C.土星", "D.火星"], correct: "B" },
+    { question: "“白马非马”出自谁口？", choices: ["A.韩非", "B.庄子", "C.公孙龙", "D.宋玉"], correct: "C" },
+    { question: "大雁塔在哪里？", choices: ["A.西宁", "B.黑龙江", "C.西安", "D.白银"], correct: "C" },
+    { question: "泼水节是我国哪一民族一年中最盛大的节日？", choices: ["A.傣族", "B.苗族", "C.维吾尔族", "D.蒙古族"], correct: "A" },
+    { question: "被称为“瓷都”的是我国哪一城市？", choices: ["A.贵阳", "B.重庆", "C.乌鲁木齐", "D.景德镇"], correct: "D" },
+    { question: "华夏民族是在哪儿诞生的？", choices: ["A.黄河流域", "B.长江流域", "C.渭水", "D.珠江"], correct: "A" },
+    { question: "湖南湖北的“湖”是指？", choices: ["A.鄱阳湖", "B.西湖", "C.太湖", "D.洞庭湖"], correct: "D" },
+    { question: "陕西乾陵武则天墓碑上有几个字？", choices: ["A.三个字", "B.无一字", "C.五个字", "D.四个字"], correct: "B" },
+    { question: "中国古代提出“人性本善”的是：", choices: ["A.孔子", "B.荀子", "C.老子", "D.孟子"], correct: "D" },
+    { question: "海底的珊瑚是：", choices: ["A.植物", "B.矿物", "C.合成物", "D.动物"], correct: "D" },
+    { question: "有“东方瑞士”之称的城市是：", choices: ["A.南宁", "B.大理", "C.昆明", "D.拉萨"], correct: "B" },
+    { question: "戚继光驱逐的是哪国侵略者？", choices: ["A.高丽", "B.日本", "C.英国", "D.泰国"], correct: "B" },
+    { question: "科举制始于哪个朝代？", choices: ["A.宋朝", "B.明朝", "C.隋唐", "D.清朝"], correct: "C" },
+    { question: "被称为“凤雏”的是中国古代哪位名将？", choices: ["A.岳飞", "B.关羽", "C.张飞", "D.赵云"], correct: "A" },
+    { question: "中国的国花是：", choices: ["A.梅花", "B.腊梅花", "C.荷花", "D.玫瑰花"], correct: "A" },
+    { question: "《红楼梦》中的贾宝玉的生母是谁？", choices: ["A.王熙凤", "B.贾母", "C.李纨", "D.王夫人"], correct: "D" },
+    { question: "我国四大名著之一《西游记》中，师徒四人的首领是谁？", choices: ["A.唐僧", "B.孙悟空", "C.猪八戒", "D.沙和尚"], correct: "A" },
+    { question: "“刻舟求剑”这个故事发生在哪部古代典籍中？", choices: ["A.《庄子》", "B.《论语》", "C.《孟子》", "D.《战国策》"], correct: "A" }
+    // Add more questions here...
+];
+
 
     let currentQuestion = 0;
     let correctAnswers = 0;
@@ -107,17 +80,22 @@
 
     function checkAnswer() {
         const userAnswer = document.getElementById("inputAnswer").value.toUpperCase();
-        if (userAnswer === quizData[currentQuestion].correct) {
+        const correctAnswer = quizData[currentQuestion].correct;
+
+        if (userAnswer === correctAnswer) {
             document.getElementById("result").textContent = "Correct! Well done.";
-            correctAnswers++;
-            playQuizAudio();
         } else {
             document.getElementById("result").textContent = "Wrong answer. Try again.";
             playQuizAudio();
         }
 
         currentQuestion++;
-        displayQuestion();
+
+        if (currentQuestion >= quizData.length) {
+            showResult();
+        } else {
+            displayQuestion();
+        }
     }
 
     function showResult() {
