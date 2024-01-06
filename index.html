@@ -25,9 +25,9 @@
 
 <script>
     const quizData = [
-        { question: "世界上使用人数最多的语言是:", choices: ["A.英语", "B.汉语", "C.西班牙语", "D.世界语"], correct: "B" },
-        { question: "世界上海拔最高的山峰是哪一座?", choices: ["A.乔戈里峰", "B.珠穆朗玛峰", "C.干城章嘉峰", "D.公格尔山峰"], correct: "B" },
-        { question: "\"鲁\"是我国哪个省份的简称:", choices: ["A.河北", "B.吉林", "C.山东", "D.山西"], correct: "C" },
+        { question: "世界上使用人数最多的语言是:", choices: ["A.英语", "B.汉语", "C.西班牙语", "D.世界语"], correct: "B.汉语" },
+        { question: "世界上海拔最高的山峰是哪一座?", choices: ["A.乔戈里峰", "B.珠穆朗玛峰", "C.干城章嘉峰", "D.公格尔山峰"], correct: "B.珠穆朗玛峰" },
+        { question: "\"鲁\"是我国哪个省份的简称:", choices: ["A.河北", "B.吉林", "C.山东", "D.山西"], correct: "C.山东" },
         // ... (Add all other questions and answer choices)
     ];
 
@@ -73,14 +73,14 @@
         const userAnswer = document.getElementById("inputAnswer").value.toUpperCase();
         const correctAnswer = quizData[currentQuestion].correct;
 
+        currentQuestion++;
+
         if (userAnswer === correctAnswer) {
             document.getElementById("result").textContent = "Correct! Well done.";
         } else {
             document.getElementById("result").textContent = "Wrong answer. Try again.";
-            playQuizAudio();
+            playQuizAudio(userAnswer, correctAnswer);
         }
-
-        currentQuestion++;
 
         if (currentQuestion >= quizData.length) {
             showResult();
@@ -94,11 +94,11 @@
         resultElem.textContent = `Quiz Over. You answered ${correctAnswers} out of ${quizData.length} questions correctly.`;
     }
 
-    function playQuizAudio() {
+    function playQuizAudio(userAnswer, correctAnswer) {
         const quizAudio = document.getElementById("quizAudio");
 
-        // Check if the answer is incorrect and the audio is paused
-        if (userAnswer !== correctAnswer && quizAudio.paused) {
+        // Check if the answer is incorrect
+        if (userAnswer !== correctAnswer) {
             quizAudio.play();
         }
     }
