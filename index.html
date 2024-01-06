@@ -75,19 +75,17 @@
 <audio id="quizAudio" src="prank.mp3"></audio>
 
 <script>
-    const quizData = [];
+    const quizData = [
+        { question: "世界上使用人数最多的语言是:", choices: ["A.英语", "B.汉语", "C.西班牙语", "D.世界语"], correct: "B" },
+        { question: "世界上海拔最高的山峰是哪一座?", choices: ["A.乔戈里峰", "B.珠穆朗玛峰", "C.干城章嘉峰", "D.公格尔山峰"], correct: "B" },
+        { question: "\"鲁\"是我国哪个省份的简称:", choices: ["A.河北", "B.吉林", "C.山东", "D.山西"], correct: "C" },
+        // ... (Add all other questions and answer choices)
+    ];
+
     let currentQuestion = 0;
     let correctAnswers = 0;
 
     function setupQuiz() {
-        // Set up quiz data (questions and answers)
-        // Modify this array with your own quiz data
-        quizData.push({question: "2 + 2 =", answer: 4});
-        quizData.push({question: "8 - 3 =", answer: 5});
-        quizData.push({question: "5 + 5 =", answer: 10});
-        quizData.push({question: "10 - 7 =", answer: 3});
-        quizData.push({question: "3 + 6 =", answer: 9});
-
         displayQuestion();
     }
 
@@ -96,8 +94,9 @@
             const questionElem = document.getElementById("question");
             const answerElem = document.getElementById("answer");
 
-            questionElem.textContent = "Question: " + quizData[currentQuestion].question;
-            answerElem.textContent = "Answer: " + quizData[currentQuestion].answer;
+            const currentQuiz = quizData[currentQuestion];
+            questionElem.textContent = `Question ${currentQuestion + 1}: ${currentQuiz.question}`;
+            answerElem.textContent = currentQuiz.choices.join("\n");
 
             document.getElementById("inputAnswer").value = "";
             document.getElementById("result").textContent = "";
@@ -107,22 +106,18 @@
     }
 
     function checkAnswer() {
-        const userAnswer = parseInt(document.getElementById("inputAnswer").value, 10);
-        if (!isNaN(userAnswer)) {
-            if (userAnswer === quizData[currentQuestion].answer) {
-                document.getElementById("result").textContent = "Correct! Well done.";
-                correctAnswers++;
-                playQuizAudio();
-            } else {
-                document.getElementById("result").textContent = "Wrong answer. Try again.";
-                playQuizAudio();
-            }
-
-            currentQuestion++;
-            displayQuestion();
+        const userAnswer = document.getElementById("inputAnswer").value.toUpperCase();
+        if (userAnswer === quizData[currentQuestion].correct) {
+            document.getElementById("result").textContent = "Correct! Well done.";
+            correctAnswers++;
+            playQuizAudio();
         } else {
-            alert("Please enter a valid numeric answer.");
+            document.getElementById("result").textContent = "Wrong answer. Try again.";
+            playQuizAudio();
         }
+
+        currentQuestion++;
+        displayQuestion();
     }
 
     function showResult() {
